@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" group="data" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/data_main.iml" filepath="$PROJECT_DIR$/.idea/modules/data/data_main.iml" group="data" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/data/data_test.iml" filepath="$PROJECT_DIR$/.idea/modules/data/data_test.iml" group="data" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ru.matrosov.vladimir.diplom.iml" filepath="$PROJECT_DIR$/.idea/modules/ru.matrosov.vladimir.diplom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ru.matrosov.vladimir.diplom_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ru.matrosov.vladimir.diplom_main.iml" group="ru.matrosov.vladimir.diplom" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ru.matrosov.vladimir.diplom_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ru.matrosov.vladimir.diplom_test.iml" group="ru.matrosov.vladimir.diplom" />
+      <module fileurl="file://$PROJECT_DIR$/server/server.iml" filepath="$PROJECT_DIR$/server/server.iml" group="server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/server/server_main.iml" group="server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/server/server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/server/server_test.iml" group="server" />
+    </modules>
+  </component>
+</project>

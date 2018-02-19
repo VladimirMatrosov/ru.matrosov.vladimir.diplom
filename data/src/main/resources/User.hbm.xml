@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="data.User" table="users">
+        <id column="UserID" name="userID" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property column="FirstName" name="firstName" type="java.lang.String"/>
+        <property column="LastName" name="lastName" type="java.lang.String"/>
+        <property column="Email" name="email" type="java.lang.String"/>
+        <property column="Post" name="post" type="java.lang.String"/>
+        <property column="Password" name="password" type="java.lang.String"/>
+        <set name="relations" lazy="false">
+            <key column="UserID"/>
+            <one-to-many class="data.Relation"/>
+        </set>
+        <set name="messages" lazy="false">
+            <key column="UserID"/>
+            <one-to-many class="data.Message"/>
+        </set>
+    </class>
+</hibernate-mapping>

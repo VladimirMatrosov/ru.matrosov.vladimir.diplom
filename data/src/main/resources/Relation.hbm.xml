@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<hibernate-mapping xmlns="http://www.hibernate.org/xsd/hibernate-mapping">
+    <class name="data.Relation" table="relations">
+        <id column="RelationID" name="relationID" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property column="UserID" name="userID" type="java.lang.Integer"/>
+        <property column="ChatID" name="chatID" type="java.lang.Integer"/>
+
+    </class>
+</hibernate-mapping>
