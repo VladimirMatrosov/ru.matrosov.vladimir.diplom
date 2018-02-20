@@ -14,9 +14,9 @@ public interface ChatroomDAO {
 
     public Collection getChatroomsByUser(User user);
 
-    public Chatroom getChatroomByID(int id);
+    public Chatroom getChatroomByID(Integer id);
 
-    public void deleteChatroomByID(int id);
+    public void deleteChatroomByID(Integer id);
 
     public Chatroom getChatroomByName(String name);
 }

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Chatroom {
-    private int chatroomID;
+    private Integer chatroomID;
     private String name;
     private Set relations = new HashSet();
     private Set messages = new HashSet();
@@ -14,11 +14,11 @@ public class Chatroom {
 
     }
 
-    public int getChatroomID() {
+    public Integer getChatroomID() {
         return chatroomID;
     }
 
-    public void setChatroomID(int chatroomID) {
+    public void setChatroomID(Integer chatroomID) {
         this.chatroomID = chatroomID;
     }
 

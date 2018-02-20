@@ -5,9 +5,9 @@ import java.util.Date;
 
 public class Message {
 
-    private int messsageID;
-    private int userID;
-    private int chatID;
+    private Integer messsageID;
+    private Integer userID;
+    private Integer chatID;
     private String text;
     private Date date;
 
@@ -15,11 +15,11 @@ public class Message {
 
     }
 
-    public int getMesssageID() {
+    public Integer getMesssageID() {
         return messsageID;
     }
 
-    public void setMesssageID(int messsageId) {
+    public void setMesssageID(Integer messsageId) {
         this.messsageID = messsageId;
     }
 
@@ -39,19 +39,19 @@ public class Message {
         this.date = date;
     }
 
-    public int getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 
-    public int getChatID() {
+    public Integer getChatID() {
         return chatID;
     }
 
-    public void setChatID(int chatID) {
+    public void setChatID(Integer chatID) {
         this.chatID = chatID;
     }
 

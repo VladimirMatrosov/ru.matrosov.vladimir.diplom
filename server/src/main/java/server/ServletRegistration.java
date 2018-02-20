@@ -41,17 +41,18 @@ public class ServletRegistration extends HttpServlet {
                 response.getWriter().println(FAIL);
             else {
                 userDAOImp.addUser(user);
-                response.getWriter().write(SUCCESS);
+                test = userDAOImp.getUserByEmail(EMAIL);
+                response.getWriter().write(test.getUserID());
 
             }
 
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
     }
 }

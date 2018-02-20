@@ -1,33 +1,33 @@
 package data;
 
 public class Relation {
-    private int relationID;
-    private int chatID;
-    private int userID;
+    private Integer relationID;
+    private Integer chatID;
+    private Integer userID;
 
     public Relation(){}
 
-    public int getRelationID() {
+    public Integer getRelationID() {
         return relationID;
     }
 
-    public void setRelationID(int relationID) {
+    public void setRelationID(Integer relationID) {
         this.relationID = relationID;
     }
 
-    public int getChatID() {
+    public Integer getChatID() {
         return chatID;
     }
 
-    public void setChatID(int chatID) {
+    public void setChatID(Integer chatID) {
         this.chatID = chatID;
     }
 
-    public int getUserID() {
+    public Integer getUserID() {
         return userID;
     }
 
-    public void setUserID(int userID) {
+    public void setUserID(Integer userID) {
         this.userID = userID;
     }
 

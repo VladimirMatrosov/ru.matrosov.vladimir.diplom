@@ -99,7 +99,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         return chatrooms;
     }
 
-    public Chatroom getChatroomByID(int id) {
+    public Chatroom getChatroomByID(Integer id) {
         Session session = null;
         Chatroom chatroom = new Chatroom();
         try {
@@ -116,7 +116,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         return chatroom;
     }
 
-    public void deleteChatroomByID(int id) {
+    public void deleteChatroomByID(Integer id) {
         Session session = null;
         Chatroom chatroom = new Chatroom();
         try {

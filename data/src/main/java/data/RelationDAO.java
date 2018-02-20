@@ -6,4 +6,6 @@ public interface RelationDAO {
     public void updateRelation(Relation relation);
 
     public void deleteRelation(Relation relation);
+
+    public Relation getRelationByUserAndChat(User user, Chatroom chat);
 }
