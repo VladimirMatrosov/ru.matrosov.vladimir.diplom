@@ -84,7 +84,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
             query.setParameter("paramName", user_id);
             relations = query.list();
             for (int i = 0; i < relations.size(); i++) {
-                chat_id = relations.get(i).getChatID();
+                chat_id = relations.get(i).getChatroomID();
                 query = session.createQuery("from Chatroom where chatroomID = :paramName");
                 query.setParameter("paramName", chat_id);
                 chatrooms.addAll(query.list());
@@ -105,7 +105,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         try {
             session = Main.getSession();
             session.beginTransaction();
-            chatroom = session.load(Chatroom.class, id);
+            chatroom = session.get(Chatroom.class, id);
             session.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e.getMessage());
@@ -122,7 +122,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         try {
             session = Main.getSession();
             session.beginTransaction();
-            chatroom = session.load(Chatroom.class, id);
+            chatroom = session.get(Chatroom.class, id);
             session.delete(chatroom);
             session.getTransaction().commit();
         } catch (Exception e) {

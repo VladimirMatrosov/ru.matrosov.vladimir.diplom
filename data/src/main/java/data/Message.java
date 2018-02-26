@@ -7,7 +7,7 @@ public class Message {
 
     private Integer messsageID;
     private Integer userID;
-    private Integer chatID;
+    private Integer chatroomID;
     private String text;
     private Date date;
 
@@ -47,19 +47,19 @@ public class Message {
         this.userID = userID;
     }
 
-    public Integer getChatID() {
-        return chatID;
+    public Integer getChatroomID() {
+        return chatroomID;
     }
 
-    public void setChatID(Integer chatID) {
-        this.chatID = chatID;
+    public void setChatroomID(Integer chatroomID) {
+        this.chatroomID = chatroomID;
     }
 
     public String toString() {
         return "Message{" +
                 "messsageID=" + messsageID +
                 ", UserID=" + userID +
-                ", ChatID=" + chatID +
+                ", ChatID=" + chatroomID +
                 ", text='" + text + '\'' +
                 ", date=" + date +
                 '}';

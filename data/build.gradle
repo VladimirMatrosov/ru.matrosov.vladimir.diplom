@@ -13,4 +13,6 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
     compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.13'
     compile group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '5.2.12.Final'
+
+
 }

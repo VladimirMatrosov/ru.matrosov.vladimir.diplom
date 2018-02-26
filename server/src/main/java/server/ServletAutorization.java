@@ -1,5 +1,6 @@
 package server;
 
+import com.google.gson.Gson;
 import data.UserDAOImp;
 import data.User;
 
@@ -10,8 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static help.Constants.PASSWORD_NOT_MATCH;
-import static help.Constants.SUCCESS;
+import static constant.Status.FAIL;
+import static constant.Status.PASSWORD_NOT_MATCH;
+import static constant.Status.SUCCESS;
 
 @WebServlet(name = "ServletAutorization", urlPatterns = "/autorization")
 public class ServletAutorization extends HttpServlet {
@@ -21,12 +23,21 @@ public class ServletAutorization extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            String email = request.getParameter(EMAIL);
+            String password = request.getParameter(PASSWORD);
+
             UserDAOImp userDAOImp = new UserDAOImp();
-            User user = userDAOImp.getUserByEmail(request.getParameter(EMAIL));
-            if (user.getPassword().equals(request.getParameter(PASSWORD))) {
-                response.getWriter().write(user.getUserID());
-            } else
-                response.getWriter().write(PASSWORD_NOT_MATCH);
+            User user = userDAOImp.getUserByEmail(email);
+            if (user.getUserID() != null){
+                if(user.getPassword().equals(password)){
+                    writeResponse(new AutorizationResponse(SUCCESS, user), response);
+                }else {
+                    writeResponse(new AutorizationResponse(PASSWORD_NOT_MATCH, null), response);
+                }
+            }else{
+                writeResponse(new AutorizationResponse(FAIL, null), response);
+            }
+
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -35,6 +46,23 @@ public class ServletAutorization extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
+        doPost(request, response);
+    }
+
+    public void writeResponse(AutorizationResponse autorizationResponse, HttpServletResponse response)
+            throws IOException {
+        Gson gson = new Gson();
+        String str = gson.toJson(autorizationResponse);
+        response.getWriter().write(str);
+    }
+
+    public class AutorizationResponse {
+        int status;
+        User user;
+
+        public AutorizationResponse(int status, User user) {
+            this.status = status;
+            this.user = user;
+        }
     }
 }

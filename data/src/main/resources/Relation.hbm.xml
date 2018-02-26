@@ -6,7 +6,7 @@
             <generator class="increment"/>
         </id>
         <property column="UserID" name="userID" type="java.lang.Integer"/>
-        <property column="ChatID" name="chatID" type="java.lang.Integer"/>
+        <property column="ChatroomID" name="chatroomID" type="java.lang.Integer"/>
 
     </class>
 </hibernate-mapping>

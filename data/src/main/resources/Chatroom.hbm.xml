@@ -11,7 +11,7 @@
             <key column="ChatroomID"/>
             <one-to-many class="data.Relation"/>
         </set>
-        <set name="messages">
+        <set name="messages" lazy="false">
             <key column="ChatroomID"/>
             <one-to-many class="data.Message"/>
         </set>

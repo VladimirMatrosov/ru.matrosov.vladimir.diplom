@@ -27,7 +27,7 @@ public class ServletSendMessage extends HttpServlet {
             Chatroom chatroom = chatroomDAO.getChatroomByName(request.getParameter(NAME_CHAT));
             Message message = new Message();
             message.setMesssageID(null);
-            message.setChatID(chatroom.getChatroomID());
+            message.setChatroomID(chatroom.getChatroomID());
             message.setUserID(user.getUserID());
             message.setText(request.getParameter(TEXT));
             Date date = Calendar.getInstance().getTime();

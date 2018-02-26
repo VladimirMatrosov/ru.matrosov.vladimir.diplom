@@ -1,8 +1,6 @@
 package test;
 
-import data.User;
-import data.UserDAO;
-import data.UserDAOImp;
+import data.*;
 
 import java.util.Collection;
 
@@ -11,5 +9,9 @@ public class TestHib {
         UserDAO userdao = new UserDAOImp();
         Collection<User> collection = userdao.getUsersAll();
         System.out.println(collection.toString());
+        ChatroomDAO chatroomDAO = new ChatroomDAOImpl();
+        Chatroom chatroom = chatroomDAO.getChatroomByID(5);
+
+        System.out.println(chatroom.toString());
     }
 }

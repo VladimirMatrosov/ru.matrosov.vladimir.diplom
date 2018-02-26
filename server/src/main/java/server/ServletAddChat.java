@@ -1,5 +1,6 @@
 package server;
 
+import com.google.gson.Gson;
 import data.*;
 
 import javax.servlet.ServletException;
@@ -9,37 +10,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static help.Constants.FAIL;
+import static constant.Status.FAIL;
+import static constant.Status.SUCCESS;
 
 @WebServlet(name = "ServletAddChat", urlPatterns = "/addChat")
 public class ServletAddChat extends HttpServlet {
 
-    public static final String EMAIL = "email";
-    public static final String CHAT_NAME = "chatName";
+    public static final String EMAIL_KEY = "email";
+    public static final String CHAT_NAME_KEY = "chatName";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            ChatroomDAOImpl chatroomDAO = new ChatroomDAOImpl();
-            Chatroom chatroom = new Chatroom();
-            UserDAOImp userDAOImp = new UserDAOImp();
-            RelationDAOImpl relationDAO = new RelationDAOImpl();
-            Relation relation = new Relation();
-            User user = userDAOImp.getUserByEmail(request.getParameter(EMAIL));
-            chatroom.setChatroomID(null);
-            chatroom.setName(request.getParameter(CHAT_NAME));
-            Chatroom test = chatroomDAO.getChatroomByName(CHAT_NAME);
-            if (test != null)
-                response.getWriter().write(FAIL);
-            else {
-                chatroomDAO.addChatroom(chatroom);
-                chatroom = chatroomDAO.getChatroomByName(CHAT_NAME);
-                relation.setChatID(chatroom.getChatroomID());
-                relation.setUserID(user.getUserID());
-                relation.setRelationID(null);
-                relationDAO.addRelation(relation);
-                response.getWriter().write(chatroom.getChatroomID());
-            }
+            String nameChat = request.getParameter(CHAT_NAME_KEY);
+            String email = request.getParameter(EMAIL_KEY);
 
+            UserDAO userDAO = new UserDAOImp();
+            User user = userDAO.getUserByEmail(email);
+
+            if ((user != null) && (nameChat != null) && (!nameChat.isEmpty())) {
+                Chatroom chatroom = new Chatroom(nameChat);
+                ChatroomDAO chatroomDAO = new ChatroomDAOImpl();
+                chatroomDAO.addChatroom(chatroom);
+
+                Relation relation = new Relation(chatroom.getChatroomID(), user.getUserID());
+                RelationDAO relationDAO = new RelationDAOImpl();
+                relationDAO.addRelation(relation);
+
+                writeResponse(new AddChatResponse(SUCCESS, chatroom),response);
+            } else {
+                writeResponse(new AddChatResponse(FAIL, null),response);
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
@@ -49,4 +49,22 @@ public class ServletAddChat extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
+
+    public void writeResponse(AddChatResponse addChatResponse, HttpServletResponse response) throws IOException {
+        Gson gson = new Gson();
+        String str = gson.toJson(addChatResponse);
+        response.getWriter().write(str);
+    }
+
+    public class AddChatResponse {
+        int status;
+        Chatroom chatroom;
+
+        public AddChatResponse(int status, Chatroom chatroom) {
+            this.status = status;
+            this.chatroom = chatroom;
+        }
+    }
+
+
 }

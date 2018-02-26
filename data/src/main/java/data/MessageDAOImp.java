@@ -128,7 +128,7 @@ public class MessageDAOImp implements MessageDAO {
         try {
             session = Main.getSession();
             session.beginTransaction();
-            message = session.load(Message.class, id);
+            message = session.get(Message.class, id);
             session.getTransaction().commit();
         } catch (Exception e) {
             System.err.println(e.getMessage());

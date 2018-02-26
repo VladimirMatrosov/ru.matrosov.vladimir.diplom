@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static help.Constants.SUCCESS;
+import static constant.Status.SUCCESS;
 
 @WebServlet(name = "ServletDeleteUser", urlPatterns = "/deleteUser")
 public class ServletDeleteUser extends HttpServlet {

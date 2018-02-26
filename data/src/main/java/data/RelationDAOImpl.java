@@ -79,4 +79,29 @@ public class RelationDAOImpl implements RelationDAO {
         }
         return relation;
     }
+
+    @Override
+    public boolean hasRelation(Integer user_id, Integer chat_id) {
+        Session session = null;
+        boolean bool = false;
+        try{
+            session = Main.getSession();
+            session.beginTransaction();
+            UserDAO userDAO = new UserDAOImp();
+            User user = userDAO.getUserByID(user_id);
+            ChatroomDAO chatroomDAO = new ChatroomDAOImpl();
+            Chatroom chatroom = chatroomDAO.getChatroomByID(chat_id);
+            RelationDAO relationDAO = new RelationDAOImpl();
+            Relation relation = relationDAO.getRelationByUserAndChat(user, chatroom);
+            if (relation != null)
+                bool = true;
+            session.getTransaction().commit();
+        }catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (session != null && session.isOpen())
+                session.close();
+        }
+        return bool;
+    }
 }

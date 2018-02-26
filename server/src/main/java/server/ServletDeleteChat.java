@@ -2,7 +2,6 @@ package server;
 
 import data.Chatroom;
 import data.ChatroomDAOImpl;
-import data.User;
 import data.UserDAOImp;
 
 import javax.servlet.ServletException;
@@ -14,7 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static help.Constants.SUCCESS;
+import static constant.Status.SUCCESS;
 
 @WebServlet(name = "ServletDeleteChat", urlPatterns = "/deleteChat")
 public class ServletDeleteChat extends HttpServlet {

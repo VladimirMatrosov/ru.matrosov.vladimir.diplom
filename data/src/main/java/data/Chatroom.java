@@ -14,6 +14,10 @@ public class Chatroom {
 
     }
 
+    public Chatroom(String name){
+        this.name = name;
+    }
+
     public Integer getChatroomID() {
         return chatroomID;
     }
@@ -49,9 +53,6 @@ public class Chatroom {
     public String toString() {
         return "Chatroom{" +
                 "chatroomID=" + chatroomID +
-                ", name='" + name + '\'' +
-                ", relations=" + relations +
-                ", messages=" + messages +
-                '}';
+                ", name='" + name + '}';
     }
 }

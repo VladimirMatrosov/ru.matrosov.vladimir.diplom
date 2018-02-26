@@ -10,9 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static help.Constants.FAIL;
-import static help.Constants.PASSWORD_NOT_MATCH;
-import static help.Constants.SUCCESS;
+import static constant.Status.FAIL;
+import static constant.Status.PASSWORD_NOT_MATCH;
 
 @WebServlet(name = "ServletRegistration", urlPatterns = "/registration")
 public class ServletRegistration extends HttpServlet {

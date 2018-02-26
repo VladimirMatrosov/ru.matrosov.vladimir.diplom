@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static help.Constants.FAIL;
+import static constant.Status.FAIL;
 
 @WebServlet(name = "ServletShowChat", urlPatterns = "/showChat")
 public class ServletShowChat extends HttpServlet {

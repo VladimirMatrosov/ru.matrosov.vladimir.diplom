@@ -2,10 +2,16 @@ package data;
 
 public class Relation {
     private Integer relationID;
-    private Integer chatID;
+    private Integer chatroomID;
     private Integer userID;
 
     public Relation(){}
+
+    public Relation(Integer idChat, Integer idUser){
+        this.relationID = null;
+        this.chatroomID = idChat;
+        this.userID = idUser;
+    }
 
     public Integer getRelationID() {
         return relationID;
@@ -15,12 +21,12 @@ public class Relation {
         this.relationID = relationID;
     }
 
-    public Integer getChatID() {
-        return chatID;
+    public Integer getChatroomID() {
+        return chatroomID;
     }
 
-    public void setChatID(Integer chatID) {
-        this.chatID = chatID;
+    public void setChatroomID(Integer chatroomID) {
+        this.chatroomID = chatroomID;
     }
 
     public Integer getUserID() {
