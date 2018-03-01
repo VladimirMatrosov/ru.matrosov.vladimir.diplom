@@ -145,7 +145,7 @@ public class UserDAOImp implements UserDAO {
         try {
             session = Main.getSession();
             session.beginTransaction();
-            Query query = session.createQuery("from Relation where chatID = :paramName");
+            Query query = session.createQuery("from Relation where chatroomID = :paramName");
             query.setParameter("paramName", chat_id);
             relations = query.list();
             for (int i = 0; i < relations.size(); i++) {
@@ -163,6 +163,26 @@ public class UserDAOImp implements UserDAO {
             }
         }
         return users;
+    }
+
+    @Override
+    public boolean isNull(User user) {
+        boolean bool = false;
+        Session session = null;
+        try {
+            session = Main.getSession();
+            session.beginTransaction();
+            if (user.getUserID() == null)
+                    bool = true;
+            session.getTransaction().commit();
+        }catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return bool;
     }
 
     @Override

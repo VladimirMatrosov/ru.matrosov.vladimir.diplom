@@ -37,4 +37,12 @@ public class Relation {
         this.userID = userID;
     }
 
+    @Override
+    public String toString() {
+        return "Relation{" +
+                "relationID=" + relationID +
+                ", chatroomID=" + chatroomID +
+                ", userID=" + userID +
+                '}';
+    }
 }

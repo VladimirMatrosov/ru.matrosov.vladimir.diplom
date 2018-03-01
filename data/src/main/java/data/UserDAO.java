@@ -18,4 +18,6 @@ public interface UserDAO {
     public void deleteUser(User user);
 
     public Collection getUsersByChatroom(Chatroom chatroom);
+
+    public boolean isNull(User user);
 }

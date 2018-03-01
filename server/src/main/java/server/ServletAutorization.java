@@ -28,7 +28,7 @@ public class ServletAutorization extends HttpServlet {
 
             UserDAOImp userDAOImp = new UserDAOImp();
             User user = userDAOImp.getUserByEmail(email);
-            if (user.getUserID() != null){
+            if (!userDAOImp.isNull(user)){
                 if(user.getPassword().equals(password)){
                     writeResponse(new AutorizationResponse(SUCCESS, user), response);
                 }else {

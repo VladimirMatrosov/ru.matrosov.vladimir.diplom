@@ -28,7 +28,7 @@ public class ServletAddUserToChat extends HttpServlet {
             User user = userDAOImp.getUserByEmail(email);
             ChatroomDAO chatroomDAOImp = new ChatroomDAOImpl();
             Chatroom chatroom = chatroomDAOImp.getChatroomByID(chatId);
-            if ((chatroom != null) && (user != null)
+            if ((!chatroomDAOImp.isNull(chatroom)) && (!userDAOImp.isNull(user))
                     && (new RelationDAOImpl().hasRelation(user.getUserID(), chatroom.getChatroomID()) == false)) {
                 RelationDAO relationDAOImp = new RelationDAOImpl();
                 Relation relation = new Relation(chatroom.getChatroomID(), user.getUserID());

@@ -19,4 +19,6 @@ public interface ChatroomDAO {
     public void deleteChatroomByID(Integer id);
 
     public Chatroom getChatroomByName(String name);
+
+    public boolean isNull(Chatroom chatroom);
 }

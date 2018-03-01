@@ -118,7 +118,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
 
     public void deleteChatroomByID(Integer id) {
         Session session = null;
-        Chatroom chatroom = new Chatroom();
+        Chatroom chatroom;
         try {
             session = Main.getSession();
             session.beginTransaction();
@@ -150,5 +150,25 @@ public class ChatroomDAOImpl implements ChatroomDAO {
                 session.close();
         }
         return chatroom;
+    }
+
+    @Override
+    public boolean isNull(Chatroom chatroom) {
+        boolean bool = false;
+        Session session = null;
+        try{
+            session = Main.getSession();
+            session.beginTransaction();
+            if (chatroom == null)
+                bool = true;
+            session.getTransaction().commit();
+        }catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (session != null && session.isOpen()) {
+                session.close();
+            }
+        }
+        return bool;
     }
 }

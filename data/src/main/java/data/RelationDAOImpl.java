@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class RelationDAOImpl implements RelationDAO {
@@ -61,17 +62,17 @@ public class RelationDAOImpl implements RelationDAO {
         Session session = null;
         Relation relation = new Relation();
         List<Relation> relations = new ArrayList<>();
-        try{
+        try {
             session = Main.getSession();
             session.beginTransaction();
-            Query query = session.createQuery("from Relation where userID = :paramUser, chatID = :paramChat");
+            Query query = session.createQuery("from Relation where (userID = :paramUser) and (chatroomID = :paramChat)");
             query.setParameter("paramUser", user.getUserID());
             query.setParameter("paramChat", chat.getChatroomID());
             relations = query.list();
             relation = relations.get(0);
             session.getTransaction().commit();
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         } finally {
             if (session != null && session.isOpen())
@@ -81,10 +82,10 @@ public class RelationDAOImpl implements RelationDAO {
     }
 
     @Override
-    public boolean hasRelation(Integer user_id, Integer chat_id) {
+    public boolean hasRelation(int user_id, int chat_id) {
         Session session = null;
         boolean bool = false;
-        try{
+        try {
             session = Main.getSession();
             session.beginTransaction();
             UserDAO userDAO = new UserDAOImp();
@@ -93,15 +94,36 @@ public class RelationDAOImpl implements RelationDAO {
             Chatroom chatroom = chatroomDAO.getChatroomByID(chat_id);
             RelationDAO relationDAO = new RelationDAOImpl();
             Relation relation = relationDAO.getRelationByUserAndChat(user, chatroom);
-            if (relation != null)
+            if (relation.getRelationID() != null)
                 bool = true;
             session.getTransaction().commit();
-        }catch (Exception e) {
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         } finally {
             if (session != null && session.isOpen())
                 session.close();
         }
         return bool;
+    }
+
+    @Override
+    public Collection getRelationsByUser(User user) {
+        List<Relation> relations = new ArrayList<>();
+        Session session = null;
+        try {
+            session = Main.getSession();
+            session.beginTransaction();
+            Query query = session.createQuery("from Relation where userID = :paramID");
+            query.setParameter("paramID", user.getUserID());
+            relations = query.list();
+            session.getTransaction().commit();
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            if (session != null && session.isOpen())
+                session.close();
+        }
+        return relations;
     }
 }

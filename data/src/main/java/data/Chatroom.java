@@ -53,6 +53,6 @@ public class Chatroom {
     public String toString() {
         return "Chatroom{" +
                 "chatroomID=" + chatroomID +
-                ", name='" + name + '}';
+                ", name=" + name + '}';
     }
 }

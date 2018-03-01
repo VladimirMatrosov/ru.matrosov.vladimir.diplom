@@ -27,7 +27,7 @@ public class ServletAddChat extends HttpServlet {
             UserDAO userDAO = new UserDAOImp();
             User user = userDAO.getUserByEmail(email);
 
-            if ((user != null) && (nameChat != null) && (!nameChat.isEmpty())) {
+            if ((!userDAO.isNull(user)) && (nameChat != null) && (!nameChat.isEmpty())) {
                 Chatroom chatroom = new Chatroom(nameChat);
                 ChatroomDAO chatroomDAO = new ChatroomDAOImpl();
                 chatroomDAO.addChatroom(chatroom);
