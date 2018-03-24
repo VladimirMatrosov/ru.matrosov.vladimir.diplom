@@ -11,7 +11,7 @@ public class TestHib {
         UserDAO userdao = new UserDAOImp();
         Collection<User> collection = userdao.getUsersAll();
         System.out.println(collection.toString());
-        ChatroomDAO chatroomDAO = new ChatroomDAOImpl();
+     /*   ChatroomDAO chatroomDAO = new ChatroomDAOImpl();
         Chatroom chatroom = chatroomDAO.getChatroomByID(5);
         System.out.println(chatroomDAO.isNull(chatroomDAO.getChatroomByID(3)));
         System.out.println(userdao.getUserByID(2));
@@ -26,6 +26,6 @@ public class TestHib {
         System.out.println(relationDAO.hasRelation(2, 11));
 
         User user = userdao.getUserByID(2);
-        System.out.println(user.toString());
+        System.out.println(user.toString()); */
     }
 }

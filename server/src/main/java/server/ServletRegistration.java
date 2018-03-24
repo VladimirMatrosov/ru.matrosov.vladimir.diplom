@@ -3,6 +3,7 @@ package server;
 import com.google.gson.Gson;
 import data.User;
 import data.UserDAOImp;
+import generics.Response;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,15 +47,14 @@ public class ServletRegistration extends HttpServlet {
                         user.setPost(post);
                     if ((user.getFirstName() != null) && (user.getPost() != null)) {
                         userDAOImp.addUser(user);
-                        writeResponse(new RegistrationResponse(SUCCESS, user), response);
+
+                        new Response<User>(SUCCESS, user).writeResponse(response);
                     } else
-                        writeResponse(new RegistrationResponse(NULL_VALUE, null), response);
+                        new Response<User>(NULL_VALUE, null).writeResponse(response);
                 }else
-                    writeResponse(new RegistrationResponse(PASSWORD_NOT_MATCH, null), response);
-
+                    new Response<User>(PASSWORD_NOT_MATCH, null).writeResponse(response);
             } else
-                writeResponse(new RegistrationResponse(FAIL, null), response);
-
+                new Response<User>(FAIL, null).writeResponse(response);
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
@@ -63,21 +63,5 @@ public class ServletRegistration extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-    }
-
-    public void writeResponse(RegistrationResponse registrationResponse, HttpServletResponse response) throws IOException {
-        Gson gson = new Gson();
-        String str = gson.toJson(registrationResponse);
-        response.getWriter().write(str);
-    }
-
-    public class RegistrationResponse {
-        int status;
-        User user;
-
-        public RegistrationResponse(int status, User user) {
-            this.status = status;
-            this.user = user;
-        }
     }
 }

@@ -2,6 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import data.*;
+import generics.Response;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,11 +46,12 @@ public class ServletSendMessage extends HttpServlet {
                     Date date = Calendar.getInstance().getTime();
                     message.setDate(date);
                     messageDAOImp.addMessage(message);
-                    writeResponse(new SendMessageResponse(SUCCESS, chatroom), response);
+
+                    new Response<Chatroom>(SUCCESS, chatroom).writeResponse(response);
                 } else
-                    writeResponse(new SendMessageResponse(NULL_VALUE, null), response);
+                    new Response<Chatroom>(NULL_VALUE, null).writeResponse(response);
             }else
-                writeResponse(new SendMessageResponse(FAIL, null), response);
+                new Response<Chatroom>(FAIL, null).writeResponse(response);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -59,21 +61,5 @@ public class ServletSendMessage extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-    }
-
-    public void writeResponse(SendMessageResponse sendMessageResponse, HttpServletResponse response) throws IOException {
-        Gson gson = new Gson();
-        String str = gson.toJson(sendMessageResponse);
-        response.getWriter().write(str);
-    }
-
-    public class SendMessageResponse {
-        int status;
-        Chatroom chatroom;
-
-        public SendMessageResponse(int status, Chatroom chatroom) {
-            this.status = status;
-            this.chatroom = chatroom;
-        }
     }
 }

@@ -3,6 +3,7 @@ package server;
 import com.google.gson.Gson;
 import data.UserDAOImp;
 import data.User;
+import generics.Response;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,12 +31,12 @@ public class ServletAutorization extends HttpServlet {
             User user = userDAOImp.getUserByEmail(email);
             if (!userDAOImp.isNull(user)){
                 if(user.getPassword().equals(password)){
-                    writeResponse(new AutorizationResponse(SUCCESS, user), response);
+                    new Response<User>(SUCCESS, user).writeResponse(response);
                 }else {
-                    writeResponse(new AutorizationResponse(PASSWORD_NOT_MATCH, null), response);
+                    new Response<User>(PASSWORD_NOT_MATCH, null).writeResponse(response);
                 }
             }else{
-                writeResponse(new AutorizationResponse(FAIL, null), response);
+                new Response<User>(FAIL, null).writeResponse(response);
             }
 
 
@@ -47,22 +48,5 @@ public class ServletAutorization extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-    }
-
-    public void writeResponse(AutorizationResponse autorizationResponse, HttpServletResponse response)
-            throws IOException {
-        Gson gson = new Gson();
-        String str = gson.toJson(autorizationResponse);
-        response.getWriter().write(str);
-    }
-
-    public class AutorizationResponse {
-        int status;
-        User user;
-
-        public AutorizationResponse(int status, User user) {
-            this.status = status;
-            this.user = user;
-        }
     }
 }

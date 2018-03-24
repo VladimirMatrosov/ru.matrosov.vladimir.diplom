@@ -10,15 +10,15 @@ public interface ChatroomDAO {
 
     public void deleteChatroom(Chatroom chatroom);
 
-    public Collection getChatroomAll();
+    public void deleteChatroomByID(Integer id);
 
-    public Collection getChatroomsByUser(User user);
+    public Collection getChatroomAll();
 
     public Chatroom getChatroomByID(Integer id);
 
-    public void deleteChatroomByID(Integer id);
-
     public Chatroom getChatroomByName(String name);
+
+    public Collection getChatroomsByUser(User user);
 
     public boolean isNull(Chatroom chatroom);
 }

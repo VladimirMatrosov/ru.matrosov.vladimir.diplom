@@ -2,6 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import data.*;
+import generics.Response;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,9 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static constant.Status.CHAT_HAS_NOT_USER;
-import static constant.Status.FAIL;
-import static constant.Status.SUCCESS;
+import static constant.Status.*;
 
 @WebServlet(name = "ServletLeaveChat", urlPatterns = "/leaveChat")
 public class ServletLeaveChat extends HttpServlet {
@@ -34,11 +33,12 @@ public class ServletLeaveChat extends HttpServlet {
                 if (relationDAO.hasRelation(user.getUserID(), chatroom.getChatroomID())) {
                     Relation relation = relationDAO.getRelationByUserAndChat(user, chatroom);
                     relationDAO.deleteRelation(relation);
-                    writeResponse(new LeaveChatResponse(SUCCESS, user),response);
+
+                    new Response<User>(SUCCESS, user).writeResponse(response);
                 } else
-                    writeResponse(new LeaveChatResponse(CHAT_HAS_NOT_USER, user),response);
+                    new Response<User>(CHAT_HAS_NOT_USER, user).writeResponse(response);
             }else
-                writeResponse(new LeaveChatResponse(FAIL,null), response);
+                new Response<User>(FAIL, null).writeResponse(response);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -48,21 +48,5 @@ public class ServletLeaveChat extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-    }
-
-    public void writeResponse(LeaveChatResponse leaveChatResponse, HttpServletResponse response) throws IOException {
-        Gson gson = new Gson();
-        String str = gson.toJson(leaveChatResponse);
-        response.getWriter().write(str);
-    }
-
-    public class LeaveChatResponse{
-        int status;
-        User user;
-
-        public LeaveChatResponse(int status, User user) {
-            this.status = status;
-            this.user = user;
-        }
     }
 }

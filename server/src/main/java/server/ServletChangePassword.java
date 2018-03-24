@@ -3,6 +3,7 @@ package server;
 import com.google.gson.Gson;
 import data.User;
 import data.UserDAOImp;
+import generics.Response;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,11 +36,11 @@ public class ServletChangePassword extends HttpServlet {
                 if (password1.equals(password2)) {
                     user.setPassword(password1);
                     userDAOImp.updateUser(user);
-                    writeResponse(new ChangePasswordResponse(SUCCESS, user), response);
+                    new Response<User>(SUCCESS, user).writeResponse(response);
                 } else
-                    writeResponse(new ChangePasswordResponse(PASSWORD_NOT_MATCH, null), response);
+                    new Response<User>(PASSWORD_NOT_MATCH, null).writeResponse(response);
             } else
-                writeResponse(new ChangePasswordResponse(FAIL, null), response);
+                new Response<User>(FAIL, null).writeResponse(response);
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
@@ -48,21 +49,5 @@ public class ServletChangePassword extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-    }
-
-    public void writeResponse(ChangePasswordResponse changePasswordResponse, HttpServletResponse response) throws IOException {
-        Gson gson = new Gson();
-        String str = gson.toJson(changePasswordResponse);
-        response.getWriter().write(str);
-    }
-
-    public class ChangePasswordResponse {
-        int status;
-        User user;
-
-        public ChangePasswordResponse(int status, User user) {
-            this.status = status;
-            this.user = user;
-        }
     }
 }

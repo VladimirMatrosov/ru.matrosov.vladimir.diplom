@@ -2,6 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import data.*;
+import generics.Response;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,9 +35,9 @@ public class ServletAddUserToChat extends HttpServlet {
                 Relation relation = new Relation(chatroom.getChatroomID(), user.getUserID());
                 relationDAOImp.addRelation(relation);
 
-                writeResponse(new AddUserToChatResponse(SUCCESS, chatroom), response);
+                new Response<Chatroom>(SUCCESS, chatroom).writeResponse(response);
             } else {
-                writeResponse(new AddUserToChatResponse(FAIL, null), response);
+                new Response<Chatroom>(FAIL, null).writeResponse(response);
             }
 
         } catch (Exception ex) {
@@ -49,20 +50,4 @@ public class ServletAddUserToChat extends HttpServlet {
         doPost(request, response);
     }
 
-    public void writeResponse(AddUserToChatResponse addUserToChatResponse, HttpServletResponse response)
-            throws IOException {
-        Gson gson = new Gson();
-        String str = gson.toJson(addUserToChatResponse);
-        response.getWriter().write(str);
-    }
-
-    public class AddUserToChatResponse {
-        int status;
-        Chatroom chatroom;
-
-        public AddUserToChatResponse(int status, Chatroom chatroom) {
-            this.status = status;
-            this.chatroom = chatroom;
-        }
-    }
 }

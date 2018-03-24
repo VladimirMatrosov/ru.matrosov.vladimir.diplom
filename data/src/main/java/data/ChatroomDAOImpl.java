@@ -8,6 +8,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class ChatroomDAOImpl implements ChatroomDAO {
+
+    @Override
     public void addChatroom(Chatroom chatroom) {
         Session session = null;
         try {
@@ -23,6 +25,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         }
     }
 
+    @Override
     public void updateChatroom(Chatroom chatroom) {
         Session session = null;
         try {
@@ -38,6 +41,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         }
     }
 
+    @Override
     public void deleteChatroom(Chatroom chatroom) {
         Session session = null;
         try {
@@ -53,6 +57,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         }
     }
 
+    @Override
     public Collection getChatroomAll() {
         List<Chatroom> chatrooms = new ArrayList<>();
         Session session = null;
@@ -71,6 +76,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         return chatrooms;
     }
 
+    @Override
     public Collection getChatroomsByUser(User user) {
         List<Chatroom> chatrooms = new ArrayList<>();
         Session session = null;
@@ -99,6 +105,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         return chatrooms;
     }
 
+    @Override
     public Chatroom getChatroomByID(Integer id) {
         Session session = null;
         Chatroom chatroom = new Chatroom();
@@ -116,6 +123,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         return chatroom;
     }
 
+    @Override
     public void deleteChatroomByID(Integer id) {
         Session session = null;
         Chatroom chatroom;
@@ -133,6 +141,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         }
     }
 
+    @Override
     public Chatroom getChatroomByName(String name) {
         Session session = null;
         Chatroom chatroom = new Chatroom();

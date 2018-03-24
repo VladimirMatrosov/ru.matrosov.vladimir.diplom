@@ -2,6 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import data.*;
+import generics.Response;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,9 +37,10 @@ public class ServletDeleteUser extends HttpServlet {
                  }
                 }
                 userDAOImp.deleteUser(user);
-                writeResponse(new DeleteUserResponse(SUCCESS),response);
+
+                new Response<>(SUCCESS, null).writeResponse(response);
             }else
-                writeResponse(new DeleteUserResponse(FAIL),response);
+                new Response<>(FAIL, null).writeResponse(response);
         }catch (Exception ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
@@ -47,19 +49,5 @@ public class ServletDeleteUser extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-    }
-
-    public void writeResponse(DeleteUserResponse deleteUserResponse, HttpServletResponse response) throws IOException {
-        Gson gson = new Gson();
-        String str = gson.toJson(deleteUserResponse);
-        response.getWriter().write(str);
-    }
-
-    public class DeleteUserResponse{
-        int status;
-
-        public DeleteUserResponse(int status) {
-            this.status = status;
-        }
     }
 }

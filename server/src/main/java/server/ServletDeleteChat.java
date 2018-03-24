@@ -2,6 +2,7 @@ package server;
 
 import com.google.gson.Gson;
 import data.*;
+import generics.Response;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,11 +36,12 @@ public class ServletDeleteChat extends HttpServlet {
                     MessageDAO messageDAO = new MessageDAOImp();
                     messageDAO.deleteMessagesByChat(chatroom);
                     chatroomDAO.deleteChatroom(chatroom);
-                    writeResponse(new DeleteChatResponse(SUCCESS), response);
+
+                    new Response<>(SUCCESS, null).writeResponse(response);
                 } else
-                    writeResponse(new DeleteChatResponse(CHAT_HAS_USERS), response);
+                    new Response<>(CHAT_HAS_USERS, null).writeResponse(response);
             } else
-                writeResponse(new DeleteChatResponse(FAIL), response);
+                new Response<>(FAIL, null).writeResponse(response);
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
@@ -48,19 +50,5 @@ public class ServletDeleteChat extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
-    }
-
-    public void writeResponse(DeleteChatResponse deleteChatResponse, HttpServletResponse response) throws IOException {
-        Gson gson = new Gson();
-        String str = gson.toJson(deleteChatResponse);
-        response.getWriter().write(str);
-    }
-
-    public class DeleteChatResponse {
-        int status;
-
-        public DeleteChatResponse(int status) {
-            this.status = status;
-        }
     }
 }
