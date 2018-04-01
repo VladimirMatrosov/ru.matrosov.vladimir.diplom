@@ -17,6 +17,7 @@ public class Response<T> {
     }
 
     public void writeResponse(HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("UTF-8");
         Gson gson = new Gson();
         String str = gson.toJson(this);
         response.getWriter().write(str);
