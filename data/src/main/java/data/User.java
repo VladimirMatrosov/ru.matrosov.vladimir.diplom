@@ -10,6 +10,15 @@ public class User {
     private String email;
     private String post;
     private String password;
+
+
+    public boolean equals(User user) {
+        boolean bool = false;
+        if (this.userID == user.getUserID())
+            bool = true;
+        return bool;
+    }
+
     private Set relations = new HashSet();
     private Set messages = new HashSet();
 

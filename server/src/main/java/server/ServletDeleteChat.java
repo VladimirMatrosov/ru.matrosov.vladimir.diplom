@@ -37,11 +37,9 @@ public class ServletDeleteChat extends HttpServlet {
                     messageDAO.deleteMessagesByChat(chatroom);
                     chatroomDAO.deleteChatroom(chatroom);
 
-                    new Response<>(SUCCESS, null).writeResponse(response);
-                } else
-                    new Response<>(CHAT_HAS_USERS, null).writeResponse(response);
-            } else
-                new Response<>(FAIL, null).writeResponse(response);
+                    new Response<User>(SUCCESS, null).writeResponse(response);
+                }
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ServletException(ex);

@@ -28,10 +28,16 @@ public class TestHib {
         User user = userdao.getUserByID(2);
         System.out.println(user.toString()); */
 
-        ChatroomDAOImpl chatroomDAO = new ChatroomDAOImpl();
-        Chatroom chatroom = chatroomDAO.getChatroomByID(14);
-        MessageDAO messageDAO = new MessageDAOImp();
-        List<Message> messages = (ArrayList) messageDAO.getMessagesByChat(chatroom);
-        System.out.println(messages.toString());
+//        ChatroomDAOImpl chatroomDAO = new ChatroomDAOImpl();
+//        Chatroom chatroom = chatroomDAO.getChatroomByID(14);
+//        MessageDAO messageDAO = new MessageDAOImp();
+//        List<Message> messages = (ArrayList) messageDAO.getMessagesByChat(chatroom);
+//        System.out.println(messages.toString());
+
+        Chatroom chatroom = new Chatroom();
+        ChatroomDAO chatroomDAO = new ChatroomDAOImpl();
+        System.out.println(chatroomDAO.isNull(chatroom));
+        chatroom = chatroomDAO.getChatroomByID(4);
+        System.out.println(chatroomDAO.isNull(chatroom));
     }
 }

@@ -34,7 +34,7 @@ public class ServletLeaveChat extends HttpServlet {
                     Relation relation = relationDAO.getRelationByUserAndChat(user, chatroom);
                     relationDAO.deleteRelation(relation);
 
-                    new Response<User>(SUCCESS, user).writeResponse(response);
+                    request.getRequestDispatcher("/deleteChat").forward(request, response);
                 } else
                     new Response<User>(CHAT_HAS_NOT_USER, user).writeResponse(response);
             }else

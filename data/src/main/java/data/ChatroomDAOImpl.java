@@ -168,7 +168,7 @@ public class ChatroomDAOImpl implements ChatroomDAO {
         try{
             session = Main.getSession();
             session.beginTransaction();
-            if (chatroom == null)
+            if (chatroom.getChatroomID() == null)
                 bool = true;
             session.getTransaction().commit();
         }catch (Exception e) {
