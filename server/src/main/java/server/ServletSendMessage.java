@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 
+import static constant.RequestParameters.EMAIL_KEY;
+import static constant.RequestParameters.ID_CHAT_KEY;
+import static constant.RequestParameters.TEXT_KEY;
 import static constant.Status.FAIL;
 import static constant.Status.NULL_VALUE;
 import static constant.Status.SUCCESS;
@@ -20,15 +23,11 @@ import static constant.Status.SUCCESS;
 @WebServlet(name = "ServletSendMessage", urlPatterns = "/sendMessage")
 public class ServletSendMessage extends HttpServlet {
 
-    public static final String EMAIL = "email";
-    public static final String ID_CHAT = "idChat";
-    public static final String TEXT = "text";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String email = request.getParameter(EMAIL);
-            String text = request.getParameter(TEXT);
-            int chat_id = Integer.parseInt(request.getParameter(ID_CHAT));
+            String email = request.getParameter(EMAIL_KEY);
+            String text = request.getParameter(TEXT_KEY);
+            int chat_id = Integer.parseInt(request.getParameter(ID_CHAT_KEY));
 
             UserDAOImp userDAOImp = new UserDAOImp();
             User user = userDAOImp.getUserByEmail(email);

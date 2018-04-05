@@ -15,18 +15,17 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static constant.RequestParameters.EMAIL_KEY;
+import static constant.RequestParameters.ID_CHAT_KEY;
 import static constant.Status.*;
 
 @WebServlet(name = "ServletShowChat", urlPatterns = "/showChat")
 public class ServletShowChat extends HttpServlet {
 
-    public static final String ID_CHAT = "idChat";
-    public static final String EMAIL = "email";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int chat_id = Integer.parseInt(request.getParameter(ID_CHAT));
-            String email = request.getParameter(EMAIL);
+            int chat_id = Integer.parseInt(request.getParameter(ID_CHAT_KEY));
+            String email = request.getParameter(EMAIL_KEY);
 
             ChatroomDAOImpl chatroomDAO = new ChatroomDAOImpl();
             Chatroom chat = chatroomDAO.getChatroomByID(chat_id);

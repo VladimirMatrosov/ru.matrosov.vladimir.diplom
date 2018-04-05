@@ -12,6 +12,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static constant.RequestParameters.CHAT_NAME_KEY;
+import static constant.RequestParameters.EMAIL_KEY;
+import static constant.RequestParameters.EMAIL_USER_KEY;
 import static constant.Status.CHAT_HAS_USERS;
 import static constant.Status.FAIL;
 import static constant.Status.SUCCESS;
@@ -19,14 +22,10 @@ import static constant.Status.SUCCESS;
 @WebServlet(name = "ServletOpenChat", urlPatterns = "/openChat")
 public class ServletOpenChat extends HttpServlet {
 
-    public static final String EMAIL = "email";
-    public static final String EMAIL_USER = "email_user";
-    public static final String CHAT_NAME = "chatName";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String email = request.getParameter(EMAIL);
-            String email_user = request.getParameter(EMAIL_USER);
+            String email = request.getParameter(EMAIL_KEY);
+            String email_user = request.getParameter(EMAIL_USER_KEY);
             if (!email.equals(email_user)) {
                 UserDAO userDAO = new UserDAOImp();
                 User user1 = userDAO.getUserByEmail(email);
@@ -53,7 +52,7 @@ public class ServletOpenChat extends HttpServlet {
                 } else {
                     String chatName = user1.getFirstName() + " " + user1.getLastName() + " | " + user2.getFirstName() +
                             " " + user2.getLastName();
-                    request.setAttribute(CHAT_NAME, chatName);
+                    request.setAttribute(CHAT_NAME_KEY, chatName);
                     request.getRequestDispatcher("/addChatWithUser").forward(request,response);
                 }
 

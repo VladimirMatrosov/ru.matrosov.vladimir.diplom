@@ -13,17 +13,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static constant.RequestParameters.EMAIL_KEY;
 import static constant.Status.FAIL;
 import static constant.Status.SUCCESS;
 
 @WebServlet(name = "ServletDeleteUser", urlPatterns = "/deleteUser")
 public class ServletDeleteUser extends HttpServlet {
 
-    public static final String EMAIL = "email";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
-            String email = request.getParameter(EMAIL);
+            String email = request.getParameter(EMAIL_KEY);
 
             UserDAOImp userDAOImp = new UserDAOImp();
             User user = userDAOImp.getUserByEmail(email);

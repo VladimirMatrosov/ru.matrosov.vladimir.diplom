@@ -11,14 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constant.RequestParameters.EMAIL_KEY;
+import static constant.RequestParameters.ID_CHAT_KEY;
 import static constant.Status.FAIL;
 import static constant.Status.SUCCESS;
 
 @WebServlet(name = "ServletAddUserToChat", urlPatterns = "/addUserToChat")
 public class ServletAddUserToChat extends HttpServlet {
-
-    public static final String ID_CHAT_KEY = "idChat";
-    public static final String EMAIL_KEY = "email";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {

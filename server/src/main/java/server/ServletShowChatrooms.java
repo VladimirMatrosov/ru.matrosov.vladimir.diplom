@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import static constant.RequestParameters.EMAIL_KEY;
 import static constant.Status.FAIL;
 import static constant.Status.NULL_VALUE;
 import static constant.Status.SUCCESS;
@@ -20,11 +21,9 @@ import static constant.Status.SUCCESS;
 @WebServlet(name = "ServletShowChatrooms", urlPatterns = "/showChatrooms")
 public class ServletShowChatrooms extends HttpServlet {
 
-    public static final String EMAIL = "email";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try{
-            String email = request.getParameter(EMAIL);
+            String email = request.getParameter(EMAIL_KEY);
             UserDAO userDAO = new UserDAOImp();
             User user = userDAO.getUserByEmail(email);
 

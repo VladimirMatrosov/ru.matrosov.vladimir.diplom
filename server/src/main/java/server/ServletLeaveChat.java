@@ -11,18 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constant.RequestParameters.EMAIL_KEY;
+import static constant.RequestParameters.ID_CHAT_KEY;
 import static constant.Status.*;
 
 @WebServlet(name = "ServletLeaveChat", urlPatterns = "/leaveChat")
 public class ServletLeaveChat extends HttpServlet {
 
-    public static final String EMAIL = "email";
-    public static final String ID_CHAT = "idChat";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String email = request.getParameter(EMAIL);
-            int id_chat = Integer.parseInt(request.getParameter(ID_CHAT));
+            String email = request.getParameter(EMAIL_KEY);
+            int id_chat = Integer.parseInt(request.getParameter(ID_CHAT_KEY));
 
             UserDAOImp userDAOImp = new UserDAOImp();
             User user = userDAOImp.getUserByEmail(email);

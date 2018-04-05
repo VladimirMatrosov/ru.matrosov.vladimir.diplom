@@ -12,22 +12,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constant.RequestParameters.*;
 import static constant.Status.*;
 
 @WebServlet(name = "ServletChangePassword", urlPatterns = "/changePassword")
 public class ServletChangePassword extends HttpServlet {
 
-    public static final String EMAIL = "email";
-    public static final String PASSWORD_1 = "password1";
-    public static final String PASSWORD_2 = "password2";
-    public static final String PASSWORD = "password";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String email = request.getParameter(EMAIL);
-            String password = request.getParameter(PASSWORD);
-            String password1 = request.getParameter(PASSWORD_1);
-            String password2 = request.getParameter(PASSWORD_2);
+            String email = request.getParameter(EMAIL_KEY);
+            String password = request.getParameter(PASSWORD_KEY);
+            String password1 = request.getParameter(PASSWORD_1_KEY);
+            String password2 = request.getParameter(PASSWORD_2_KEY);
 
             UserDAOImp userDAOImp = new UserDAOImp();
             User user = userDAOImp.getUserByEmail(email);

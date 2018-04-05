@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constant.RequestParameters.EMAIL_KEY;
+import static constant.RequestParameters.PASSWORD_KEY;
 import static constant.Status.FAIL;
 import static constant.Status.PASSWORD_NOT_MATCH;
 import static constant.Status.SUCCESS;
@@ -19,13 +21,10 @@ import static constant.Status.SUCCESS;
 @WebServlet(name = "ServletAutorization", urlPatterns = "/autorization")
 public class ServletAutorization extends HttpServlet {
 
-    public static final String EMAIL = "email";
-    public static final String PASSWORD = "password";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String email = request.getParameter(EMAIL);
-            String password = request.getParameter(PASSWORD);
+            String email = request.getParameter(EMAIL_KEY);
+            String password = request.getParameter(PASSWORD_KEY);
 
             UserDAOImp userDAOImp = new UserDAOImp();
             User user = userDAOImp.getUserByEmail(email);

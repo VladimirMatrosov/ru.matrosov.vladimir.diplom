@@ -12,25 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constant.RequestParameters.*;
 import static constant.Status.*;
 
 @WebServlet(name = "ServletRegistration", urlPatterns = "/registration")
 public class ServletRegistration extends HttpServlet {
-    public static final String PASSWORD_1 = "password1";
-    public static final String FIRSTNAME = "firstname";
-    public static final String LASTNAME = "lastname";
-    public static final String EMAIL = "email";
-    public static final String POST = "post";
-    public static final String PASSWORD_2 = "password2";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String first_name = request.getParameter(FIRSTNAME);
-            String last_name = request.getParameter(LASTNAME);
-            String email = request.getParameter(EMAIL);
-            String post = request.getParameter(POST);
-            String password1 = request.getParameter(PASSWORD_1);
-            String password2 = request.getParameter(PASSWORD_2);
+            String first_name = request.getParameter(FIRST_NAME_KEY);
+            String last_name = request.getParameter(LAST_NAME_KEY);
+            String email = request.getParameter(EMAIL_KEY);
+            String post = request.getParameter(POST_KEY);
+            String password1 = request.getParameter(PASSWORD_1_KEY);
+            String password2 = request.getParameter(PASSWORD_2_KEY);
 
             UserDAOImp userDAOImp = new UserDAOImp();
             if ((email != null) && (!email.isEmpty()) && (userDAOImp.isNull(userDAOImp.getUserByEmail(email)))) {

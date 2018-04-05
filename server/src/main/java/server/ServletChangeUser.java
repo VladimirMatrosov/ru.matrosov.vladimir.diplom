@@ -12,25 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constant.RequestParameters.*;
 import static constant.Status.FAIL;
 import static constant.Status.SUCCESS;
 
 @WebServlet(name = "ServletChangeUser", urlPatterns = "/changeUser")
 public class ServletChangeUser extends HttpServlet {
 
-    public static final String EMAIL = "email";
-    public static final String FIRST_NAME = "firstName";
-    public static final String LAST_NAME = "lastName";
-    public static final String NEW_EMAIL = "newEmail";
-    public static final String POST = "post";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String email = request.getParameter(EMAIL);
-            String first_name = request.getParameter(FIRST_NAME);
-            String last_name = request.getParameter(LAST_NAME);
-            String new_email = request.getParameter(NEW_EMAIL);
-            String post = request.getParameter(POST);
+            String email = request.getParameter(EMAIL_KEY);
+            String first_name = request.getParameter(FIRST_NAME_KEY);
+            String last_name = request.getParameter(LAST_NAME_KEY);
+            String new_email = request.getParameter(NEW_EMAIL_KEY);
+            String post = request.getParameter(POST_KEY);
 
             UserDAOImp userDAOImp = new UserDAOImp();
             User user = userDAOImp.getUserByEmail(email);

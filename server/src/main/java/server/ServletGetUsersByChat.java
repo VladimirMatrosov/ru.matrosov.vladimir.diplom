@@ -12,17 +12,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import static constant.RequestParameters.ID_CHAT_KEY;
 import static constant.Status.FAIL;
 import static constant.Status.SUCCESS;
 
 @WebServlet(name = "ServletGetUsersByChat", urlPatterns = "/getUsersByChat")
 public class ServletGetUsersByChat extends HttpServlet {
 
-    public static final String ID_CHAT = "id_chat";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Integer idChat = Integer.parseInt(request.getParameter(ID_CHAT));
+            Integer idChat = Integer.parseInt(request.getParameter(ID_CHAT_KEY));
             ChatroomDAO chatroomDAO = new ChatroomDAOImpl();
             UserDAO userDAO = new UserDAOImp();
             ArrayList<User> users = (ArrayList<User>) userDAO.getUsersByChatroom(chatroomDAO.getChatroomByID(idChat));

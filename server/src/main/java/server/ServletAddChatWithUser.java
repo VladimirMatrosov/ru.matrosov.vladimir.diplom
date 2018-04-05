@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static constant.RequestParameters.CHAT_NAME_KEY;
+import static constant.RequestParameters.EMAIL_KEY;
+import static constant.RequestParameters.EMAIL_USER_KEY;
 import static constant.Status.FAIL;
 import static constant.Status.SUCCESS;
 
@@ -17,15 +20,11 @@ import static constant.Status.SUCCESS;
 @WebServlet(name = "ServletAddChatWithUser", urlPatterns = "/addChatWithUser")
 public class ServletAddChatWithUser extends HttpServlet {
 
-    public static final String EMAIL_KEY = "email";
-    public static final String CHAT_NAME_KEY = "chatName";
-    public static final String EMAIL_USER = "email_user";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
             String nameChat = (String) request.getAttribute(CHAT_NAME_KEY);
             String email = request.getParameter(EMAIL_KEY);
-            String email_user = request.getParameter(EMAIL_USER);
+            String email_user = request.getParameter(EMAIL_USER_KEY);
 
             UserDAO userDAO = new UserDAOImp();
             User user = userDAO.getUserByEmail(email);

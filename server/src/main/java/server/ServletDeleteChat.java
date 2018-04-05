@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static constant.RequestParameters.ID_CHAT_KEY;
 import static constant.Status.CHAT_HAS_USERS;
 import static constant.Status.FAIL;
 import static constant.Status.SUCCESS;
@@ -20,11 +21,9 @@ import static constant.Status.SUCCESS;
 @WebServlet(name = "ServletDeleteChat", urlPatterns = "/deleteChat")
 public class ServletDeleteChat extends HttpServlet {
 
-    public static final String ID_CHAT = "idChat";
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            Integer id_chat = Integer.parseInt(request.getParameter(ID_CHAT));
+            Integer id_chat = Integer.parseInt(request.getParameter(ID_CHAT_KEY));
 
             ChatroomDAOImpl chatroomDAO = new ChatroomDAOImpl();
             Chatroom chatroom = chatroomDAO.getChatroomByID(id_chat);
