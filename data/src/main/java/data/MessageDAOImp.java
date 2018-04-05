@@ -87,7 +87,7 @@ public class MessageDAOImp implements MessageDAO {
         try {
             session = Main.getSession();
             session.beginTransaction();
-            Query query = session.createQuery("from Message where chatID = :paramName");
+            Query query = session.createQuery("from Message where chatroomID = :paramName");
             query.setParameter("paramName", chat_id);
             messages = query.list();
             session.getTransaction().commit();
@@ -107,7 +107,7 @@ public class MessageDAOImp implements MessageDAO {
         try {
             session = Main.getSession();
             session.beginTransaction();
-            Query query = session.createQuery("from Message where chatID = :paramName");
+            Query query = session.createQuery("from Message where chatroomID = :paramName");
             query.setParameter("paramName", chat_id);
             messages = query.list();
             for (int i = 0; i < messages.size(); i++) {

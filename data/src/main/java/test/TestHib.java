@@ -8,9 +8,9 @@ import java.util.List;
 
 public class TestHib {
     public static void main(String[] args){
-        UserDAO userdao = new UserDAOImp();
-        Collection<User> collection = userdao.getUsersAll();
-        System.out.println(collection.toString());
+//        UserDAO userdao = new UserDAOImp();
+//        Collection<User> collection = userdao.getUsersAll();
+//        System.out.println(collection.toString());
      /*   ChatroomDAO chatroomDAO = new ChatroomDAOImpl();
         Chatroom chatroom = chatroomDAO.getChatroomByID(5);
         System.out.println(chatroomDAO.isNull(chatroomDAO.getChatroomByID(3)));
@@ -27,5 +27,11 @@ public class TestHib {
 
         User user = userdao.getUserByID(2);
         System.out.println(user.toString()); */
+
+        ChatroomDAOImpl chatroomDAO = new ChatroomDAOImpl();
+        Chatroom chatroom = chatroomDAO.getChatroomByID(14);
+        MessageDAO messageDAO = new MessageDAOImp();
+        List<Message> messages = (ArrayList) messageDAO.getMessagesByChat(chatroom);
+        System.out.println(messages.toString());
     }
 }

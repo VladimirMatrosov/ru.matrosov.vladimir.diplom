@@ -3,6 +3,7 @@ package server;
 import com.google.gson.Gson;
 import data.*;
 import generics.Response;
+import generics.ShowMessageResponse;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static constant.Status.CHAT_HAS_NOT_USER;
-import static constant.Status.FAIL;
-import static constant.Status.SUCCESS;
+import static constant.Status.*;
 
 @WebServlet(name = "ServletShowChat", urlPatterns = "/showChat")
 public class ServletShowChat extends HttpServlet {
@@ -36,13 +35,26 @@ public class ServletShowChat extends HttpServlet {
             if ((!userDAO.isNull(userDAO.getUserByEmail(email))) && (!chatroomDAO.isNull(chat))) {
                 if (relationDAO.hasRelation(userDAO.getUserByEmail(email).getUserID(), chat.getChatroomID())) {
                     MessageDAO messageDAO = new MessageDAOImp();
-                    List<Message> messages = (ArrayList)messageDAO.getMessagesByChat(chat);
+                    List<Message> messages = (ArrayList) messageDAO.getMessagesByChat(chat);
+                    if (!messages.isEmpty()) {
+                        List<User> users = new ArrayList<>();
+                        for (int i = 0; i < messages.size(); i++) {
+                            int id = messages.get(i).getUserID();
+                            User user = userDAO.getUserByID(id);
+                            if (userDAO.isNull(user))
+                                users.add(null);
+                            else
+                                users.add(user);
+                        }
 
-                    new Response<Collection>(SUCCESS, messages).writeResponse(response);
-                }else
-                    new Response<Collection>(CHAT_HAS_NOT_USER, null).writeResponse(response);
+                        new ShowMessageResponse(SUCCESS, users, messages).writeResponse(response);
+                    } else {
+                        new ShowMessageResponse(NULL_VALUE, null, null).writeResponse(response);
+                    }
+                } else
+                    new ShowMessageResponse(CHAT_HAS_NOT_USER, null, null).writeResponse(response);
             } else
-                new Response<Collection>(FAIL, null).writeResponse(response);
+                new ShowMessageResponse(FAIL, null, null).writeResponse(response);
         } catch (Exception ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
